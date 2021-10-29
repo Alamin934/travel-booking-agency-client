@@ -1,9 +1,16 @@
 import Button from 'react-bootstrap/Button';
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import './Banner.css';
+import useAllPlans from '../../../hooks/useAllPlans';
 
 const Banner = () => {
+    const { isLoading } = useAllPlans();
+    if (!isLoading) {
+        return <div className="text-center py-5">
+            <Spinner animation="border" variant="danger" />
+        </div>
+    }
     return (
         <div>
             <section id="home-banner" className="text-white text-center py-5 d-flex align-items-center">
