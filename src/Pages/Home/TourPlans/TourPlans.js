@@ -1,21 +1,21 @@
 import React from 'react';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Row, Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import useAllPlans from '../../../hooks/useAllPlans';
 import './TourPlans.css';
 
 const TourPlans = () => {
-    const { plans } = useAllPlans();
+    const { plans, isLoading } = useAllPlans();
     const history = useHistory();
     const handlePlanDetail = (id) => {
         const url = `/singlePlanDetail/${id}`;
         history.push(url);
     }
-    // if (!isLoading) {
-    //     return <div className="text-center py-5">
-    //         <Spinner animation="border" variant="danger" />
-    //     </div>
-    // }
+    if (!isLoading) {
+        return <div className="text-center py-5">
+            <Spinner animation="border" variant="danger" />
+        </div>
+    }
     return (
 
         <div>

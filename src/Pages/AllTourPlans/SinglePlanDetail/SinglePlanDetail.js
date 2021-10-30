@@ -1,11 +1,16 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router';
+import useAuth from '../../../hooks/useAuth';
 
 const SinglePlanDetail = () => {
+    const { user } = useAuth();
     const { id } = useParams();
     const [plan, setPlan] = useState({});
+    const [isBooking, setIsBooking] = useState(0);
+    const [isPeople, setIsPeople] = useState(0);
 
     useEffect(() => {
         fetch(`http://localhost:5000/allPlans/${id}`)
@@ -13,8 +18,26 @@ const SinglePlanDetail = () => {
             .then(data => setPlan(data))
     }, [id]);
 
-    const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data)
+    const { register, handleSubmit, reset } = useForm();
+    const onSubmit = data => {
+        axios.post('http://localhost:5000/userPlans', data)
+            .then(res => {
+                if (res.data.insertedId) {
+                    alert('Thank you for your Booking, we recived your info');
+                    reset();
+                }
+            })
+
+    };
+    const addDays = (e) => {
+        const days = e.target.value;
+        setIsBooking(days);
+    }
+    const addPeople = (e) => {
+        const people = e.target.value;
+        setIsPeople(people);
+    }
+
     return (
         <div>
             <section className="py-5">
@@ -29,7 +52,7 @@ const SinglePlanDetail = () => {
                                         <h5>ICON</h5>
                                         <div className="ms-2">
                                             <h6 className="mb-0">Duration</h6>
-                                            <small>2days</small>
+                                            <small>{isBooking} days</small>
                                         </div>
                                     </div>
                                 </Col>
@@ -56,7 +79,7 @@ const SinglePlanDetail = () => {
                                         <h5>ICON</h5>
                                         <div className="ms-2">
                                             <h6 className="mb-0">Group Size</h6>
-                                            <small>5 People</small>
+                                            <small>{isPeople}  People</small>
                                         </div>
                                     </div>
                                 </Col>
@@ -70,20 +93,32 @@ const SinglePlanDetail = () => {
                         <Col xs={12} md={4}>
                             {/* USER DETAILS FORM */}
                             <form onSubmit={handleSubmit(onSubmit)}>
-                                <label>Tour Date</label>
-                                <input type="date" {...register("date")} className="form-control form-control-lg mb-3" placeholder="Tour Date" />
+                                <label>Title</label>
+                                {plan.title && <input {...register("title")} className="form-control form-control-lg mb-3" defaultValue={plan?.title} />}
+
+                                <label>Tour From</label>
+                                <input type="date" {...register("date", { required: true })} className="form-control form-control-lg mb-3" placeholder="Tour From" />
 
                                 <label>Duration</label>
-                                <input type="number" {...register("duration")} className="form-control form-control-lg mb-3" placeholder="days" />
+                                <input type="number" {...register("days", { required: true })} className="form-control form-control-lg mb-3" onChange={addDays} placeholder="days" />
 
                                 <label>Total People</label>
-                                <input type="number" {...register("groupSize")} className="form-control form-control-lg mb-3" placeholder="Total People" />
+                                <input type="number" {...register("totalPeople", { required: true })} className="form-control form-control-lg mb-3" onChange={addPeople} placeholder="Total People" />
+
+                                <label>Price</label>
+                                {plan.price && <input type="number" {...register("price")} className="form-control form-control-lg mb-3" defaultValue={plan?.price} />}
+
+                                <label>Location</label>
+                                {plan.location && <input {...register("location")} className="form-control form-control-lg mb-3" defaultValue={plan?.location} />}
+
+                                <label>Image URL</label>
+                                {plan.url && <input {...register("url")} className="form-control form-control-lg mb-3" defaultValue={plan?.url} />}
 
                                 <label>Email</label>
-                                <input {...register("email")} defaultValue="user email" className="form-control form-control-lg mb-3" placeholder="Email" />
+                                <input {...register("email")} defaultValue={user?.email} className="form-control form-control-lg mb-3" placeholder="Email" />
 
                                 <label>User Name</label>
-                                <input {...register("useName")} defaultValue="user name" className="form-control form-control-lg mb-3" placeholder="User Name" />
+                                <input {...register("useName")} defaultValue={user?.displayName} className="form-control form-control-lg mb-3" placeholder="User Name" />
 
                                 <div className="text-end mt-4">
                                     <input className="btn btn-outline-danger btn-lg" type="submit" value="Book Now" />
