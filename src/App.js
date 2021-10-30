@@ -11,6 +11,7 @@ import Home from './Pages/Home/Home/Home';
 import Footer from './Pages/Shared/Footer/Footer';
 import Header from './Pages/Shared/Header/Header';
 import Signin from './Pages/Signin/Signin';
+import NotFound from './Pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -27,20 +28,23 @@ function App() {
           <Route path="/allPlans">
             <AllPlans />
           </Route>
-          <Route path="/myPlans">
+          <PrivateRoute path="/myPlans">
             <MyPlans />
-          </Route>
-          <Route path="/manageAllPlans">
+          </PrivateRoute>
+          <PrivateRoute path="/manageAllPlans">
             <ManageAllPlans />
-          </Route>
+          </PrivateRoute>
           <PrivateRoute path="/singlePlanDetail/:id">
             <SinglePlanDetail></SinglePlanDetail>
           </PrivateRoute>
-          <Route path="/addPlans">
+          <PrivateRoute path="/addPlans">
             <AddPlans></AddPlans>
-          </Route>
+          </PrivateRoute>
           <Route path="/signin">
             <Signin></Signin>
+          </Route>
+          <Route path="*">
+            <NotFound></NotFound>
           </Route>
         </Switch>
         <Footer />
