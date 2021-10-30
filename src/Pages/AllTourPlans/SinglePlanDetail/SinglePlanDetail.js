@@ -20,6 +20,7 @@ const SinglePlanDetail = () => {
 
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
+        data.status = "pending";
         axios.post('http://localhost:5000/userPlans', data)
             .then(res => {
                 if (res.data.insertedId) {
@@ -27,6 +28,7 @@ const SinglePlanDetail = () => {
                     reset();
                 }
             })
+        console.log(data);
 
     };
     const addDays = (e) => {
@@ -118,7 +120,7 @@ const SinglePlanDetail = () => {
                                 <input {...register("email")} defaultValue={user?.email} className="form-control form-control-lg mb-3" placeholder="Email" />
 
                                 <label>User Name</label>
-                                <input {...register("useName")} defaultValue={user?.displayName} className="form-control form-control-lg mb-3" placeholder="User Name" />
+                                <input {...register("userName")} defaultValue={user?.displayName} className="form-control form-control-lg mb-3" placeholder="User Name" />
 
                                 <div className="text-end mt-4">
                                     <input className="btn btn-outline-danger btn-lg" type="submit" value="Book Now" />

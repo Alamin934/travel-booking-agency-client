@@ -34,7 +34,7 @@ const AddPlans = () => {
                     <input {...register("url")} className="form-control form-control-lg mb-3" placeholder="Insert Image URL" />
 
                     <div className="text-end mt-4">
-                        <input className="btn btn-primary btn-lg" type="submit" value="Add Tour Plans" />
+                        <input className="btn btn-danger btn-lg" type="submit" value="Add Tour Plans" />
                     </div>
                 </form>
             </Container>

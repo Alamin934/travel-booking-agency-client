@@ -3,6 +3,7 @@ import { Card, CardImg, Col, Container, Row, Button } from 'react-bootstrap';
 import useAuth from '../../../hooks/useAuth';
 
 const MyPlans = () => {
+    const [isCancel, setIsCancel] = useState(null);
     const { user } = useAuth();
     const email = user.email;
 
@@ -11,7 +12,26 @@ const MyPlans = () => {
         fetch(`http://localhost:5000/myPlans/${email}`)
             .then(res => res.json())
             .then(data => setUserPlans(data))
-    }, [email]);
+    }, [isCancel, email]);
+
+    const handleCancelMyPlans = (id) => {
+        const proceed = window.confirm('Are you sure, You want to Cancel this Plan?');
+        if (proceed) {
+            fetch(`http://localhost:5000/myPlans/${id}`, {
+                method: "DELETE"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount) {
+                        alert('Cancel Successfully');
+                        setIsCancel(true);
+                    }
+                    else {
+                        setIsCancel(false);
+                    }
+                })
+        }
+    };
 
     if (userPlans.length === 0) {
         return <h2 className="text-center py-5 fw-bold">No Booking Plans Found</h2>
@@ -25,10 +45,10 @@ const MyPlans = () => {
                         userPlans.map(userPlan => <Col key={userPlan._id}>
                             <Card>
                                 <Row>
-                                    <Col md={4}>
+                                    <Col xs={12} md={4}>
                                         <CardImg src={userPlan.url} alt="" />
                                     </Col>
-                                    <Col md={8}>
+                                    <Col xs={12} md={8}>
                                         <Card.Body className="rounded-3">
                                             <Card.Title className="mb-0 fs-4">{userPlan.title}</Card.Title>
                                             <Card.Text className="my-1">Location: {userPlan.location}</Card.Text>
@@ -38,7 +58,8 @@ const MyPlans = () => {
                                                 <Card.Text className="my-1">Total: {userPlan.totalPeople} People</Card.Text>
                                                 <Card.Text className="my-1">Duration: {userPlan.days} Days</Card.Text>
                                             </div>
-                                            <Button variant="danger" className="d-block">Cancel</Button>
+                                            <Card.Text className="my-1">Status: {userPlan.status}</Card.Text>
+                                            <Button onClick={() => handleCancelMyPlans(userPlan._id)} variant="danger" className="d-block mt-3">Cancel</Button>
                                         </Card.Body>
                                     </Col>
                                 </Row>
