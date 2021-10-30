@@ -5,7 +5,7 @@ const useAllPlans = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:5000/allPlans')
+        fetch('https://limitless-beyond-03016.herokuapp.com/allPlans')
             .then(res => res.json())
             .then(data => {
                 setPlans(data);

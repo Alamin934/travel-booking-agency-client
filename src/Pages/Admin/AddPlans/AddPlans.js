@@ -4,12 +4,13 @@ import { Container } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 
 const AddPlans = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
-        axios.post('http://localhost:5000/addTourPlans', data)
+        axios.post('https://limitless-beyond-03016.herokuapp.com/addTourPlans', data)
             .then(res => {
                 if (res.data.insertedId) {
                     alert('Tour Plans Details Added Successfully');
+                    reset();
                 }
             })
 

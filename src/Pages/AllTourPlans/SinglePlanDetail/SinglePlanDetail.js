@@ -13,7 +13,7 @@ const SinglePlanDetail = () => {
     const [isPeople, setIsPeople] = useState(0);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/allPlans/${id}`)
+        fetch(`https://limitless-beyond-03016.herokuapp.com/allPlans/${id}`)
             .then(res => res.json())
             .then(data => setPlan(data))
     }, [id]);
@@ -21,7 +21,7 @@ const SinglePlanDetail = () => {
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
         data.status = "pending";
-        axios.post('http://localhost:5000/userPlans', data)
+        axios.post('https://limitless-beyond-03016.herokuapp.com/userPlans', data)
             .then(res => {
                 if (res.data.insertedId) {
                     alert('Thank you for your Booking, we recived your info');

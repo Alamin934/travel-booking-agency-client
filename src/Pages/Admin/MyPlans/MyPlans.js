@@ -9,7 +9,7 @@ const MyPlans = () => {
 
     const [userPlans, setUserPlans] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/myPlans/${email}`)
+        fetch(`https://limitless-beyond-03016.herokuapp.com/myPlans/${email}`)
             .then(res => res.json())
             .then(data => setUserPlans(data))
     }, [isCancel, email]);
@@ -17,7 +17,7 @@ const MyPlans = () => {
     const handleCancelMyPlans = (id) => {
         const proceed = window.confirm('Are you sure, You want to Cancel this Plan?');
         if (proceed) {
-            fetch(`http://localhost:5000/myPlans/${id}`, {
+            fetch(`https://limitless-beyond-03016.herokuapp.com/myPlans/${id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())

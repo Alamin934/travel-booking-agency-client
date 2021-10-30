@@ -1,3 +1,5 @@
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Button, Card, Col, Container, Row, Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router';
@@ -28,11 +30,11 @@ const AllPlans = () => {
                                     <div className="bg-white mx-3 shadow rounded card-details">
                                         <Card.Body>
                                             <Card.Text>
-                                                <small className="text-muted">{plan.location}</small>
+                                                <small className="text-muted"><FontAwesomeIcon className="me-1" size="lg" icon={faMapMarkerAlt} />{plan.location}</small>
                                             </Card.Text>
-                                            <Card.Title>{plan.title}</Card.Title>
+                                            <Card.Title>{plan.title.slice(0, 30)}</Card.Title>
                                             <Card.Text>
-                                                <small className="text-muted">{plan.description}</small>
+                                                <small className="text-muted">{plan.description.slice(0, 80)}</small>
                                             </Card.Text>
                                         </Card.Body>
                                         <Card.Footer className="py-3 bg-transparent d-flex align-items-baseline justify-content-between">

@@ -6,14 +6,14 @@ const ManageAllPlans = () => {
     const [isDelete, setIsDelete] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:5000/userPlans')
+        fetch('https://limitless-beyond-03016.herokuapp.com/userPlans')
             .then(res => res.json())
             .then(data => setUserPlans(data))
     }, [isDelete]);
     const handleDeletePlan = (id) => {
         const proceed = window.confirm('Are you sure, You want to Delete this Plan?');
         if (proceed) {
-            fetch(`http://localhost:5000/myPlans/${id}`, {
+            fetch(`https://limitless-beyond-03016.herokuapp.com/myPlans/${id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())
