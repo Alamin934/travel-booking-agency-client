@@ -3,13 +3,12 @@ import { Col, Container, Form, Row, Table } from 'react-bootstrap';
 
 const ManageAllPlans = () => {
     const [userPlans, setUserPlans] = useState([]);
-    const [isDelete, setIsDelete] = useState(null);
 
     useEffect(() => {
         fetch('https://limitless-beyond-03016.herokuapp.com/userPlans')
             .then(res => res.json())
             .then(data => setUserPlans(data))
-    }, [isDelete]);
+    }, []);
     const handleDeletePlan = (id) => {
         const proceed = window.confirm('Are you sure, You want to Delete this Plan?');
         if (proceed) {
@@ -20,10 +19,8 @@ const ManageAllPlans = () => {
                 .then(data => {
                     if (data.deletedCount) {
                         alert('Deleted Successfully');
-                        setIsDelete(true);
-                    }
-                    else {
-                        setIsDelete(false);
+                        const remainingPlans = userPlans.filter(service => service._id !== id);
+                        setUserPlans(remainingPlans);
                     }
                 })
         }

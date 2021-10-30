@@ -3,7 +3,6 @@ import { Card, CardImg, Col, Container, Row, Button } from 'react-bootstrap';
 import useAuth from '../../../hooks/useAuth';
 
 const MyPlans = () => {
-    const [isCancel, setIsCancel] = useState(null);
     const { user } = useAuth();
     const email = user.email;
 
@@ -12,7 +11,7 @@ const MyPlans = () => {
         fetch(`https://limitless-beyond-03016.herokuapp.com/myPlans/${email}`)
             .then(res => res.json())
             .then(data => setUserPlans(data))
-    }, [isCancel, email]);
+    }, [email]);
 
     const handleCancelMyPlans = (id) => {
         const proceed = window.confirm('Are you sure, You want to Cancel this Plan?');
@@ -24,10 +23,8 @@ const MyPlans = () => {
                 .then(data => {
                     if (data.deletedCount) {
                         alert('Cancel Successfully');
-                        setIsCancel(true);
-                    }
-                    else {
-                        setIsCancel(false);
+                        const remainingPlans = userPlans.filter(service => service._id !== id);
+                        setUserPlans(remainingPlans);
                     }
                 })
         }
