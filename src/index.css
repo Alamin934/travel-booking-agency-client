@@ -2,9 +2,14 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif!important;
+  overflow-x: hidden!important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.active{
+  color: #DC3545!important;
 }

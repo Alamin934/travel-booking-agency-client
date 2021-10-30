@@ -34,7 +34,7 @@ const ManageAllPlans = () => {
                 <Row>
                     <Col>
                         <h2 className="mb-3">All Booking Plans List</h2>
-                        <Table responsive="md">
+                        <Table responsive="xl">
                             <thead>
                                 <tr>
                                     <th>User Name</th>

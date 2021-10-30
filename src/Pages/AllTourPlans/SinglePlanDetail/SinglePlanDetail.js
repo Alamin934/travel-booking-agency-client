@@ -1,9 +1,11 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarAlt, faDollarSign, faMapMarkerAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 const SinglePlanDetail = () => {
     const { user } = useAuth();
@@ -44,14 +46,14 @@ const SinglePlanDetail = () => {
         <div>
             <section className="py-5">
                 <Container>
-                    <Row>
+                    <Row className="g-5">
                         {/* TOUR PLAN DETAILS */}
-                        <Col xs={12} md={8}>
+                        <Col xs={12} md={7} lg={8}>
                             <img className="img-fluid" src={plan.url} alt="" />
-                            <Row className="bg-white mx-0 p-3 mt-4 shadow">
+                            <Row xs={2} md={2} lg={4} className="g-3 bg-white mx-0 p-3 mt-4 shadow">
                                 <Col>
                                     <div className="d-flex">
-                                        <h5>ICON</h5>
+                                        <span><FontAwesomeIcon size="lg" icon={faCalendarAlt} /></span>
                                         <div className="ms-2">
                                             <h6 className="mb-0">Duration</h6>
                                             <small>{isBooking} days</small>
@@ -60,7 +62,7 @@ const SinglePlanDetail = () => {
                                 </Col>
                                 <Col>
                                     <div className="d-flex">
-                                        <h5>ICON</h5>
+                                        <span><FontAwesomeIcon size="lg" icon={faMapMarkerAlt} /></span>
                                         <div className="ms-2">
                                             <h6 className="mb-0">Location</h6>
                                             <small>{plan.location}</small>
@@ -69,7 +71,7 @@ const SinglePlanDetail = () => {
                                 </Col>
                                 <Col>
                                     <div className="d-flex">
-                                        <h5>ICON</h5>
+                                        <span><FontAwesomeIcon size="lg" icon={faDollarSign} /></span>
                                         <div className="ms-2">
                                             <h6 className="mb-0">Price</h6>
                                             <small>${plan.price}</small>
@@ -78,7 +80,7 @@ const SinglePlanDetail = () => {
                                 </Col>
                                 <Col>
                                     <div className="d-flex">
-                                        <h5>ICON</h5>
+                                        <span><FontAwesomeIcon size="lg" icon={faUsers} /></span>
                                         <div className="ms-2">
                                             <h6 className="mb-0">Group Size</h6>
                                             <small>{isPeople}  People</small>
@@ -92,7 +94,8 @@ const SinglePlanDetail = () => {
                             </div>
                         </Col>
                         {/* USER DETAILS */}
-                        <Col xs={12} md={4}>
+                        <Col xs={12} md={5} lg={4}>
+                            <h3 className="mb-4">Please Give Your Info</h3>
                             {/* USER DETAILS FORM */}
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <label>Title</label>

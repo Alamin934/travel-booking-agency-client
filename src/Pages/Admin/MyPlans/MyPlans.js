@@ -40,29 +40,23 @@ const MyPlans = () => {
     return (
         <div className="py-5">
             <Container>
-                <Row xs={1} md={2} className="g-4">
+                <Row className="g-5 d-flex justify-content-center" xs={1} md={2} lg={3}>
                     {
                         userPlans.map(userPlan => <Col key={userPlan._id}>
                             <Card>
-                                <Row>
-                                    <Col xs={12} md={4}>
-                                        <CardImg src={userPlan.url} alt="" />
-                                    </Col>
-                                    <Col xs={12} md={8}>
-                                        <Card.Body className="rounded-3">
-                                            <Card.Title className="mb-0 fs-4">{userPlan.title}</Card.Title>
-                                            <Card.Text className="my-1">Location: {userPlan.location}</Card.Text>
-                                            <Card.Text className="my-1">From: {userPlan.date}</Card.Text>
-                                            <div className="d-flex justify-content-between">
-                                                <Card.Text className="my-1">Price: ${userPlan.price}</Card.Text>
-                                                <Card.Text className="my-1">Total: {userPlan.totalPeople} People</Card.Text>
-                                                <Card.Text className="my-1">Duration: {userPlan.days} Days</Card.Text>
-                                            </div>
-                                            <Card.Text className="my-1">Status: {userPlan.status}</Card.Text>
-                                            <Button onClick={() => handleCancelMyPlans(userPlan._id)} variant="danger" className="d-block mt-3">Cancel</Button>
-                                        </Card.Body>
-                                    </Col>
-                                </Row>
+                                <CardImg src={userPlan.url} alt="" />
+                                <Card.Body className="rounded-3">
+                                    <Card.Title className="mb-0 fs-4">{userPlan.title}</Card.Title>
+                                    <Card.Text className="my-1"><span className="fw-bold">Location:</span> {userPlan.location}</Card.Text>
+                                    <Card.Text className="my-1"><span className="fw-bold">From:</span> {userPlan.date}</Card.Text>
+                                    <div className="d-flex justify-content-between">
+                                        <Card.Text className="my-1"><span className="fw-bold">Price:</span> ${userPlan.price}</Card.Text>
+                                        <Card.Text className="my-1"><span className="fw-bold">Total:</span> {userPlan.totalPeople} People</Card.Text>
+                                        <Card.Text className="my-1"><span className="fw-bold">Duration:</span> {userPlan.days} Days</Card.Text>
+                                    </div>
+                                    <Card.Text className="my-1"><span className="fw-bold">Status:</span> {userPlan.status}</Card.Text>
+                                    <Button onClick={() => handleCancelMyPlans(userPlan._id)} variant="danger" className="d-block mt-3">Cancel</Button>
+                                </Card.Body>
                             </Card>
                         </Col>)
                     }

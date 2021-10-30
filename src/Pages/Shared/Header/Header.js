@@ -19,10 +19,10 @@ const Header = () => {
         <div>
             <Navbar bg="light" className="fw-bold" expand="lg">
                 <Container>
-                    <Navbar.Brand className="fs-4" as={NavLink} to="/">Peak & Go</Navbar.Brand>
+                    <Navbar.Brand className="fs-4 text-danger" as={NavLink} to="/">Peak & Go</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ms-auto d-flex align-items-center">
+                        <Nav className="ms-auto d-flex align-items-center text-center">
                             <Nav.Link as={NavLink} to="/home">Home</Nav.Link>
                             <Nav.Link as={NavLink} to="/allPlans">All Plans</Nav.Link>
                             {!user.email ?
@@ -30,7 +30,7 @@ const Header = () => {
                                     <Nav.Link as={NavLink} to="/signin">SignIn</Nav.Link>
                                 </span>
                                 :
-                                <div className="d-flex">
+                                <div className="d-lg-flex d-block">
                                     <Nav.Link as={NavLink} to="/addPlans">Add Plans</Nav.Link>
                                     <Nav.Link as={NavLink} to="/myPlans">My Plans</Nav.Link>
                                     <Nav.Link as={NavLink} to="/manageAllPlans">Manage All Plans</Nav.Link>

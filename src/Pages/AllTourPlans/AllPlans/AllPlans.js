@@ -21,8 +21,8 @@ const AllPlans = () => {
         <div>
             <section className="py-5">
                 <Container>
-                    <h1 className="text-center mb-5">Our Tour PLans</h1>
-                    <Row xs={1} md={3} className="g-4">
+                    <h1 className="text-center mb-4 fw-bold"><span className="text-danger">Our Tour</span> Plans</h1>
+                    <Row xs={1} md={2} lg={3} className="g-4">
                         {
                             plans.map(plan => <Col key={plan._id}>
                                 <Card className="border-0">
@@ -30,7 +30,7 @@ const AllPlans = () => {
                                     <div className="bg-white mx-3 shadow rounded card-details">
                                         <Card.Body>
                                             <Card.Text>
-                                                <small className="text-muted"><FontAwesomeIcon className="me-1" size="lg" icon={faMapMarkerAlt} />{plan.location}</small>
+                                                <small className="text-muted"><FontAwesomeIcon className="me-1" size="lg" icon={faMapMarkerAlt} /> {plan.location}</small>
                                             </Card.Text>
                                             <Card.Title>{plan.title.slice(0, 30)}</Card.Title>
                                             <Card.Text>

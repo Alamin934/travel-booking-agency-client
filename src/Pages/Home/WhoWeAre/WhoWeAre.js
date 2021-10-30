@@ -7,7 +7,7 @@ const WhoWeAre = () => {
         <div>
             <section className="py-5">
                 <Container>
-                    <h1 className="text-center mb-4">Who We Are?</h1>
+                    <h1 className="text-center mb-4 fw-bold">Who <span className="text-danger">We Are?</span></h1>
                     <Row className="g-4">
                         <Col xs={12} md={6}>
                             <img className="img-fluid" src="https://i.ibb.co/7CkTN4L/charles-deluvio-Lks7vei-e-Ag-unsplash-1.jpg" alt="" />
