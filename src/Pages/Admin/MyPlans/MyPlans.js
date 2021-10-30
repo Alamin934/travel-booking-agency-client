@@ -23,7 +23,7 @@ const MyPlans = () => {
                 .then(data => {
                     if (data.deletedCount) {
                         alert('Cancel Successfully');
-                        const remainingPlans = userPlans.filter(service => service._id !== id);
+                        const remainingPlans = userPlans.filter(userPlan => userPlan._id !== id);
                         setUserPlans(remainingPlans);
                     }
                 })

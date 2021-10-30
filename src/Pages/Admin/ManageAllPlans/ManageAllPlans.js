@@ -19,7 +19,7 @@ const ManageAllPlans = () => {
                 .then(data => {
                     if (data.deletedCount) {
                         alert('Deleted Successfully');
-                        const remainingPlans = userPlans.filter(service => service._id !== id);
+                        const remainingPlans = userPlans.filter(userPlan => userPlan._id !== id);
                         setUserPlans(remainingPlans);
                     }
                 })
