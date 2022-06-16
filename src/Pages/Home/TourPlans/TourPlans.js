@@ -28,7 +28,7 @@ const TourPlans = () => {
                         {
                             plans.map(plan => <Col key={plan._id}>
                                 <Card className="border-0">
-                                    <Card.Img className="img-fluid rounded" src={plan.url} />
+                                    <Card.Img className="img-fluid rounded" src={plan?.url} />
                                     <div className="bg-white mx-3 shadow rounded card-details">
                                         <Card.Body>
                                             <Card.Text>
